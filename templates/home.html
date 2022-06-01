@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="original">
+    <div>
+        <h1 class="heading">Welcome to the Flask Starter App</h1>
+        <h3>This website will allow you to view a list of Posts, create a new Post or delete one.</h2>
+    </div>
+
+    <div class="posts-container">
+        <div class="post-controls">
+            <h2>Create a Post</h2>
+            <form action="/posts" class="create-form" method="POST">
+                <div>
+                    <input type="text" name="title" placeholder="Title" required>
+                </div>
+                <div>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div>
+                    <textarea name="content" cols="30" rows="10" placeholder="Post a silly thought" required></textarea>
+                </div>
+                <button>Create Post</button>
+            </form>
+        </div>
+    
+        <div class="list-of-posts-container">
+            <h2>Posts</h2>
+            <div class="list-of-posts">
+                {% for post in posts %}
+                <div class="single-post">
+                    <h2>{{ post.title }}</h2>
+                    <p class="post-user">Posted by <em>{{ post.username }}</em></p>
+                    <p class="post-content">{{ post.content }}</p>
+                    <form class="user-controls" action='/posts/{{ post.id }}/delete' method="POST">
+                        <button>Delete</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
